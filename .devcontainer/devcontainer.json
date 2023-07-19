@@ -1,8 +1,0 @@
-{
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-  "ghcr.io/devcontainers-contrib/features/apt-packages:1": {
-    "packages":["netcat"]
-  }
-  }
-}

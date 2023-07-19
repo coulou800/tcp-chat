@@ -73,12 +73,18 @@ func (s *Server) NewConnection(ch chan net.Conn) {
 }
 
 func (s *Server) BroadcastMsg(msg models.Message) {
-	if string(msg.Content) != "" {
+	if len(string(msg.Content)) != 0 {
 
 		s.Connections.Range(func(conn, name any) bool {
 			if msg.Sender != name {
 				
 				fmt.Fprint(conn.(net.Conn), msg.Prepare())
+			} else {
+				tmp := msg.Sender
+				msg.Sender = "You"
+				fmt.Fprint(conn.(net.Conn), msg.Prepare())
+				msg.Sender = tmp
+
 			}
 			return true
 		})
